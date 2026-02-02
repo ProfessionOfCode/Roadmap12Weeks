@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Roadmap12Weeks": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
