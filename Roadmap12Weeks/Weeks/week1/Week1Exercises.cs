@@ -7,16 +7,27 @@
     /// - Records
     /// - Local functions
     /// - Nullable reference types
+    /// - Extension members
     /// </summary>
-    public class ModernCsharp
+    public class ModernCsharp: IBeforeAfterComparer
     {
+        private Camera _camera;
+
+        public ModernCsharp()
+        {
+            _camera = new Camera();
+        }
 
         public void Before()
         {
+            var cameraInfo = CameraExtensionsOldStyle.CameraInfo(_camera);
+            Console.WriteLine(cameraInfo);
         }
 
         public void After() 
         {
+            var cameraInfo = _camera.CameraInfo();       // TODO: use the new extension member syntax
+            Console.WriteLine(cameraInfo);
         }
 
     }
