@@ -6,10 +6,24 @@ namespace Roadmap12Weeks.BenchMarker.WeeksBenchmarks
     [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
     public class Week1Benchmarking
     {
-        [Benchmark]
-        public void instantiates_Week1_Reference_In_Good_Time()
+        private IBeforeAfterComparer _beforeAfterComparer;
+
+        [GlobalSetup]
+        public void Setup()
         {
-            var exerciseClass = new ModernCsharp();
+            _beforeAfterComparer = new ModernCsharp();
+        }
+
+        [Benchmark]
+        public void Before()
+        {
+            _beforeAfterComparer.Before();
+        }
+
+        [Benchmark]
+        public void After()
+        {
+           _beforeAfterComparer.After();
         }
 
     }
