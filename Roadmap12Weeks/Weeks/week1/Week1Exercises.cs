@@ -18,16 +18,18 @@
             _camera = new Camera();
         }
 
-        public void Before()
+        public string Before()
         {
             var cameraInfo = CameraExtensionsOldStyle.CameraInfo(_camera);
             Console.WriteLine(cameraInfo);
+            return cameraInfo;
         }
 
-        public void After() 
+        public string After() 
         {
             var cameraInfo = _camera.CameraInfo();       // TODO: use the new extension member syntax
             Console.WriteLine(cameraInfo);
+            return cameraInfo;
         }
 
     }
