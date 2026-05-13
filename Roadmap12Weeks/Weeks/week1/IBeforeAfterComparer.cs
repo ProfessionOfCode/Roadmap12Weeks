@@ -2,7 +2,7 @@
 {
     public interface IBeforeAfterComparer
     {
-        void Before();
-        void After();
+        string Before();
+        string After();
     }
 }

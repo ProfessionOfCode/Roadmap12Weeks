@@ -4,6 +4,7 @@ using Roadmap12Weeks.Weeks.week1;
 namespace Roadmap12Weeks.BenchMarker.WeeksBenchmarks
 {
     [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
+    [MemoryDiagnoser]
     public class Week1Benchmarking
     {
         private IBeforeAfterComparer _beforeAfterComparer;
@@ -15,15 +16,15 @@ namespace Roadmap12Weeks.BenchMarker.WeeksBenchmarks
         }
 
         [Benchmark]
-        public void Before()
+        public string Before()
         {
-            _beforeAfterComparer.Before();
+           return _beforeAfterComparer.Before();
         }
 
         [Benchmark]
-        public void After()
+        public string After()
         {
-           _beforeAfterComparer.After();
+           return _beforeAfterComparer.After();
         }
 
     }
