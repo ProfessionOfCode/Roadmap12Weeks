@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
-using Roadmap12Weeks.BenchMarker.WeeksBenchmarks;
 
 namespace Roadmap12Weeks.BenchMarker
 {
@@ -7,7 +6,7 @@ namespace Roadmap12Weeks.BenchMarker
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<Week1Benchmarking>();
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
         }
     }
 }
