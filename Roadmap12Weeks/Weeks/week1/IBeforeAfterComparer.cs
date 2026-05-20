@@ -5,4 +5,10 @@
         string Before();
         string After();
     }
+
+    public interface IBeforeAfterComparerAsync : IBeforeAfterComparer
+    {
+        Task<string> BeforeAsync();
+        Task<string> AfterAsync();
+    }
 }

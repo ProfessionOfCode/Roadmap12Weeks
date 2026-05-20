@@ -9,7 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />-->
+    <None Remove="Weeks\week1\fileIO.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Weeks\week1\fileIO.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

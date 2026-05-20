@@ -57,4 +57,43 @@ namespace Roadmap12Weeks.BenchMarker.WeeksBenchmarks
 
     }
 
+
+    [SimpleJob]
+    [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
+    [MemoryDiagnoser]
+    public class AsyncAwaitManagementBenchmark
+    {
+        private IBeforeAfterComparerAsync _beforeAfterComparerAsync;
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            _beforeAfterComparerAsync = new AsyncAwaitManagement();
+        }
+
+        [Benchmark]
+        public string Before()
+        {
+            return _beforeAfterComparerAsync.Before();
+        }
+
+        [Benchmark]
+        public async Task<string> BeforeAsync()
+        {
+            return await _beforeAfterComparerAsync.BeforeAsync();
+        }
+        
+        [Benchmark]
+        public string After()
+        {
+            return _beforeAfterComparerAsync.After();
+        }
+        
+        [Benchmark]
+        public async Task<string> AfterAsync()
+        {
+            return await _beforeAfterComparerAsync.AfterAsync();
+        }
+    }
+
 }

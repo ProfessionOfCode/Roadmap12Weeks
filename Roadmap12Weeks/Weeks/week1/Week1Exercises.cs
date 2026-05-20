@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 
 namespace Roadmap12Weeks.Weeks.week1
 {
@@ -200,6 +201,61 @@ namespace Roadmap12Weeks.Weeks.week1
             
             return $"Memory management after C# 8.0. {upperCaseNames}";
         }
+
+    }
+
+    /// <summary>
+    /// Implements synchronous and asynchronous file-read operations used for before/after comparisons via
+    /// IBeforeAfterComparerAsync.s
+    /// </summary>
+    /// <remarks>Builds the file path from the executing assembly's full name and throws FileNotFoundException
+    /// if the target file is missing. The Before/After methods use File.ReadAllText/File.ReadAllTextAsync and the
+    /// BeforeAsync/AfterAsync methods use a FileStream with ReadExactly/ReadExactlyAsync to read the file
+    /// contents.</remarks>
+    public class AsyncAwaitManagement : IBeforeAfterComparerAsync
+    {
+        private readonly string _filePath;
+
+        public AsyncAwaitManagement()
+        {
+            _filePath = Path.Combine(Path.GetFullPath(path: AppContext.BaseDirectory), "Weeks", "week1", "fileIO.txt");
+
+            if (!File.Exists(_filePath))
+            {
+                throw new FileNotFoundException($"The file {_filePath} does not exist.");
+            }
+        }
+
+        public string After()
+        {
+            using var fileStream = new FileStream(_filePath, FileMode.Open, FileAccess.Read);
+            var buffer = new byte[fileStream.Length];
+            fileStream.ReadExactly(buffer);
+            return $"File content read synchronously: {Encoding.UTF8.GetString(buffer)}";
+        }
+
+        public async Task<string> AfterAsync()
+        {
+            using var fileStream = new FileStream(_filePath, FileMode.Open, FileAccess.Read);
+            var buffer = new byte[fileStream.Length];
+            await fileStream.ReadExactlyAsync(buffer);
+            return $"File content read asynchronously: {Encoding.UTF8.GetString(buffer)}";
+        }
+
+        public string Before()
+        {           
+            var fileContent = File.ReadAllText(_filePath);
+
+            return $"File content read synchronously: {fileContent}";
+        }
+
+        public async Task<string> BeforeAsync()
+        {
+            var fileContent = await File.ReadAllTextAsync(_filePath);
+            return $"File content read asynchronously: {fileContent}";
+        }
+
+        // read file synchronously
 
     }
 }
