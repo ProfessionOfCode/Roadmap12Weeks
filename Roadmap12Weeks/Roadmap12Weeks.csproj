@@ -8,6 +8,14 @@
     <!--<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>-->
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<TieredCompilation>True</TieredCompilation>   
+	</PropertyGroup>
+
   <ItemGroup>
     <None Remove="Weeks\week1\fileIO.txt" />
   </ItemGroup>
